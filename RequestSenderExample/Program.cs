@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -9,7 +10,9 @@ namespace RequestSenderExample
         static async Task Main()
         {
             const string url = "http://localhost:5000/subscriptions/3f85807d-3597-4d7e-8125-6af924f221d7/digital-post/attachments";
-            var client = new HttpClient();
+            var httpClientHandler = new HttpClientHandler();
+            httpClientHandler.Proxy = new WebProxy("http://127.0.0.1:8888");
+            var client = new HttpClient(httpClientHandler);
 
             while (true)
             {
